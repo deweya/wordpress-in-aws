@@ -10,7 +10,8 @@ resource "aws_db_instance" "this" {
     engine_version = "10.4"
     instance_class = "db.t3.micro"
     name = "wordpress"
-    username = "my-user"
-    password = "my-pass"
+    username = "myuser123"
+    password = "mypass123"
     availability_zone = "us-east-2a"
+    db_subnet_group_name = aws_db_subnet_group.this.name
 }
