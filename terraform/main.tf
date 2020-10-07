@@ -12,4 +12,13 @@ module "rds" {
   source = "./modules/rds"
 
   private_subnet_ids = module.vpc.private_subnet_ids
+  db_security_group_id = module.vpc.db_security_group_id
+}
+
+module "ec2" {
+  source = "./modules/ec2"
+
+  wordpress_ami = var.wordpress_ami
+  public_subnet_ids = module.vpc.public_subnet_ids
+  vpc_id = module.vpc.vpc_id
 }
