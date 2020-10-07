@@ -1,0 +1,14 @@
+- name: Download WordPress
+  get_url:
+    url: https://wordpress.org/wordpress-5.5.1.tar.gz
+    dest: /tmp/wordpress-5.5.1.tar.gz
+
+- name: Unarchive tarball
+  unarchive:
+    src: /tmp/wordpress-5.5.1.tar.gz
+    dest: /var/www/html/
+
+- name: Configure wp-config.php file
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wordpress/wp-config.php

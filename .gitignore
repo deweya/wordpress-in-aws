@@ -1,1 +1,4 @@
 .terraform/
+build.hwm
+build.pwd
+build.pwi

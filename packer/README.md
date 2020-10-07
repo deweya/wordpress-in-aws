@@ -1,0 +1,1 @@
+ami-000e7ce4dd68e7a11 is CentOS 8.2.2004 x86_64

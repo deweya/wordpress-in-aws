@@ -1,0 +1,7 @@
+---
+- name: Install and Configure WordPress
+  hosts: localhost
+  become: yes
+  roles:
+    - apache
+    - wordpress
