@@ -1,10 +1,19 @@
+resource "aws_network_interface" "wordpress" {
+    count = length(var.availability_zones)
+
+    subnet_id = var.private_subnet_ids[count.index]
+    security_groups = [var.wordpress_sg]
+}
+
 resource "aws_instance" "wordpress" {
-    count = 1
+    count = length(var.availability_zones)
 
     ami = var.wordpress_ami
     instance_type = "t2.micro"
-    associate_public_ip_address = true
-    vpc_security_group_ids = ["sg-05030c6159c229e74"]
-    subnet_id = "subnet-0fa6473b784da7778"
     key_name = "wordpress"
+
+    network_interface {
+        network_interface_id = aws_network_interface.wordpress[count.index].id
+        device_index = 0
+    }
 }

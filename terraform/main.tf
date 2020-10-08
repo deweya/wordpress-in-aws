@@ -20,5 +20,9 @@ module "ec2" {
 
   wordpress_ami = var.wordpress_ami
   public_subnet_ids = module.vpc.public_subnet_ids
+  private_subnet_ids = module.vpc.private_subnet_ids
   vpc_id = module.vpc.vpc_id
+  availability_zones = var.availability_zones
+  wordpress_sg = module.vpc.wordpress_sg
+  lb_sg_id = module.vpc.lb_sg_id
 }
