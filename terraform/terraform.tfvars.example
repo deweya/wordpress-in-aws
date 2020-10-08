@@ -1,2 +1,5 @@
 availability_zones = ["us-east-2a", "us-east-2b"]
 wordpress_ami = "ami-00f11fc15d6bf0416"
+db_username = "myuser123"
+db_password = "mypass123"
+db_name = "wordpress"

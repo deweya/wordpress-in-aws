@@ -13,6 +13,9 @@ module "rds" {
 
   private_subnet_ids = module.vpc.private_subnet_ids
   db_security_group_id = module.vpc.db_security_group_id
+  db_name = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
 }
 
 module "ec2" {
@@ -26,4 +29,8 @@ module "ec2" {
   wordpress_sg = module.vpc.wordpress_sg
   lb_sg_id = module.vpc.lb_sg_id
   bastion_sg_id = module.vpc.bastion_sg_id
+  db_host = module.rds.db_host
+  db_name = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
 }

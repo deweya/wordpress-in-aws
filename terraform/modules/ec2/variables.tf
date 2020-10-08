@@ -37,3 +37,23 @@ variable "bastion_sg_id" {
     type = string
     description = "The security group that the bastion will use"
 }
+
+variable "db_name" {
+    type = string
+    description = "The name of the database"
+}
+
+variable "db_username" {
+    type = string
+    description = "The db username"
+}
+
+variable "db_password" {
+    type = string
+    description = "The db password"
+}
+
+variable "db_host" {
+    type = string
+    description = "The db host"
+}

@@ -15,10 +15,10 @@ resource "aws_instance" "wordpress" {
     user_data = <<EOF
 #!/bin/bash
 rm -f /var/www/html/.htaccess
-echo "SetEnv DB_NAME wordpress" >> /var/www/html/.htaccess
-echo "SetEnv DB_USER myuser123" >> /var/www/html/.htaccess
-echo "SetEnv DB_PASSWORD mypass123" >> /var/www/html/.htaccess
-echo "SetEnv DB_HOST terraform-20201008030934977300000004.ckgjvvlrkl8n.us-east-2.rds.amazonaws.com" >> /var/www/html/.htaccess
+echo "SetEnv DB_NAME ${var.db_name}" >> /var/www/html/.htaccess
+echo "SetEnv DB_USER ${var.db_username}" >> /var/www/html/.htaccess
+echo "SetEnv DB_PASSWORD ${var.db_password}" >> /var/www/html/.htaccess
+echo "SetEnv DB_HOST ${var.db_host}" >> /var/www/html/.htaccess
 EOF
 
     network_interface {
