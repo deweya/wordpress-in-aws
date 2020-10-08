@@ -1,34 +1,34 @@
 output "private_subnet_ids" {
-    value = aws_subnet.private.*.id
-    description = "The private subnet IDs"
+  value       = aws_subnet.private.*.id
+  description = "The private subnet IDs"
 }
 
 output "public_subnet_ids" {
-    value = aws_subnet.public.*.id
-    description = "The public subnet IDs"
+  value       = aws_subnet.public.*.id
+  description = "The public subnet IDs"
 }
 
 output "vpc_id" {
-    value = aws_vpc.this.id
-    description = "The VPC ID"
+  value       = aws_vpc.this.id
+  description = "The VPC ID"
 }
 
 output "db_security_group_id" {
-    value = aws_security_group.db.id
-    description = "The security group that the RDS database will use"
+  value       = aws_security_group.db.id
+  description = "The security group that the RDS database will use"
 }
 
 output "wordpress_sg" {
-    value = aws_security_group.wordpress.id
-    description = "The security group that wordpress ec2 instances will use"
+  value       = aws_security_group.wordpress.id
+  description = "The security group that wordpress ec2 instances will use"
 }
 
 output "lb_sg_id" {
-    value = aws_security_group.lb.id
-    description = "The security group that the ALB will use"
+  value       = aws_security_group.lb.id
+  description = "The security group that the ALB will use"
 }
 
 output "bastion_sg_id" {
-    value = aws_security_group.bastion.id
-    description = "The security group that the basion will use"
+  value       = aws_security_group.bastion.id
+  description = "The security group that the basion will use"
 }
