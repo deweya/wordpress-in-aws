@@ -27,3 +27,8 @@ output "lb_sg_id" {
     value = aws_security_group.lb.id
     description = "The security group that the ALB will use"
 }
+
+output "bastion_sg_id" {
+    value = aws_security_group.bastion.id
+    description = "The security group that the basion will use"
+}

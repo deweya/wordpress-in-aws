@@ -16,6 +16,12 @@
     state: yes
     persistent: yes
 
+- name: Set AllowOverride All
+  replace:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: "AllowOverride None"
+    replace: "AllowOverride All"
+
 - name: Start Apache
   service:
     name: httpd

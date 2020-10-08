@@ -1,2 +1,2 @@
 availability_zones = ["us-east-2a", "us-east-2b"]
-wordpress_ami = "ami-0e83aaa2d03ca3eaf"
+wordpress_ami = "ami-00f11fc15d6bf0416"

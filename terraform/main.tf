@@ -25,4 +25,5 @@ module "ec2" {
   availability_zones = var.availability_zones
   wordpress_sg = module.vpc.wordpress_sg
   lb_sg_id = module.vpc.lb_sg_id
+  bastion_sg_id = module.vpc.bastion_sg_id
 }

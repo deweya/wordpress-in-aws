@@ -32,3 +32,8 @@ variable "lb_sg_id" {
     type = string
     description = "The security group to use for the application load balancer"
 }
+
+variable "bastion_sg_id" {
+    type = string
+    description = "The security group that the bastion will use"
+}

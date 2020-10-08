@@ -33,11 +33,20 @@ resource "aws_security_group_rule" "wordpress_ingress_ssh" {
     to_port = 22
 }
 
-resource "aws_security_group_rule" "wordpress_egress_tcp" {
+resource "aws_security_group_rule" "wordpress_egress_internet" {
+    type = "egress"
+    security_group_id = aws_security_group.wordpress.id
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 0
+    to_port = 65535
+}
+
+resource "aws_security_group_rule" "wordpress_egress_db" {
     type = "egress"
     security_group_id = aws_security_group.wordpress.id
     protocol = "tcp"
     cidr_blocks = [aws_vpc.this.cidr_block]
-    from_port = 0
-    to_port = 65535
+    from_port = 3306
+    to_port = 3306
 }
