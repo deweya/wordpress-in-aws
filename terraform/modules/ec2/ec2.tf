@@ -3,6 +3,13 @@ resource "aws_network_interface" "wordpress" {
 
   subnet_id       = var.private_subnet_ids[count.index]
   security_groups = [var.wordpress_sg]
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "wordpress"
+    }
+  )
 }
 
 resource "aws_instance" "wordpress" {
@@ -25,6 +32,13 @@ EOF
     network_interface_id = aws_network_interface.wordpress[count.index].id
     device_index         = 0
   }
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "wordpress"
+    }
+  )
 }
 
 resource "aws_instance" "bastion" {
@@ -36,4 +50,11 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [var.bastion_sg_id]
   subnet_id                   = var.public_subnet_ids[count.index]
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "bastion"
+    }
+  )
 }

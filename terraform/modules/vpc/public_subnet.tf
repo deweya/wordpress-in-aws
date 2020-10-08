@@ -4,10 +4,19 @@ resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.this.id
   cidr_block        = cidrsubnet("10.0.0.0/24", 3, count.index)
   availability_zone = var.availability_zones[count.index]
+
+  tags = merge(
+    var.common_tags,
+    {
+      "visibility" = "public"
+    }
+  )
 }
 
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
+
+  tags = var.common_tags
 }
 
 resource "aws_route_table" "main" {
@@ -17,6 +26,8 @@ resource "aws_route_table" "main" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.this.id
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_main_route_table_association" "main" {
@@ -37,6 +48,8 @@ resource "aws_eip" "nat" {
   vpc = true
 
   depends_on = [aws_internet_gateway.this]
+
+  tags = var.common_tags
 }
 
 resource "aws_nat_gateway" "this" {
@@ -44,4 +57,6 @@ resource "aws_nat_gateway" "this" {
 
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
+
+  tags = var.common_tags
 }

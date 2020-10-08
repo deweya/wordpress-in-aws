@@ -1,3 +1,7 @@
+locals {
+  common_tags = map("app", "wordpress")
+}
+
 provider "aws" {
   region = "us-east-2"
 }
@@ -6,6 +10,7 @@ module "vpc" {
   source = "./modules/vpc"
 
   availability_zones = var.availability_zones
+  common_tags        = local.common_tags
 }
 
 module "rds" {
@@ -17,6 +22,7 @@ module "rds" {
   db_username          = var.db_username
   db_password          = var.db_password
   availability_zones   = var.availability_zones
+  common_tags          = local.common_tags
 }
 
 module "ec2" {
@@ -35,4 +41,5 @@ module "ec2" {
   db_username        = var.db_username
   db_password        = var.db_password
   key_pair           = var.key_pair
+  common_tags        = local.common_tags
 }

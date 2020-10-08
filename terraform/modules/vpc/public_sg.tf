@@ -1,5 +1,12 @@
 resource "aws_security_group" "lb" {
   vpc_id = aws_vpc.this.id
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "alb"
+    }
+  )
 }
 
 resource "aws_security_group_rule" "lb_ingress" {
@@ -22,6 +29,13 @@ resource "aws_security_group_rule" "lb_egress" {
 
 resource "aws_security_group" "bastion" {
   vpc_id = aws_vpc.this.id
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "bastion"
+    }
+  )
 }
 
 resource "aws_security_group_rule" "bastion_ingress" {

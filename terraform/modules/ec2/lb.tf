@@ -4,6 +4,7 @@ resource "aws_lb" "this" {
   load_balancer_type = "application"
   security_groups    = [var.lb_sg_id]
   subnets            = var.public_subnet_ids
+  tags               = var.common_tags
 }
 
 resource "aws_lb_target_group" "this" {
@@ -16,6 +17,8 @@ resource "aws_lb_target_group" "this" {
     path    = "/wordpress/wp-content/index.php"
     matcher = "200-299"
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_lb_target_group_attachment" "this" {

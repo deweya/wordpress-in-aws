@@ -21,4 +21,5 @@ resource "aws_db_instance" "this" {
   backup_window           = "05:00-05:30"
   backup_retention_period = 7
 
+  tags = var.common_tags
 }

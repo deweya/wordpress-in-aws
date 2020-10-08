@@ -1,5 +1,12 @@
 resource "aws_security_group" "db" {
   vpc_id = aws_vpc.this.id
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "db"
+    }
+  )
 }
 
 resource "aws_security_group_rule" "db_tcp" {
@@ -13,6 +20,13 @@ resource "aws_security_group_rule" "db_tcp" {
 
 resource "aws_security_group" "wordpress" {
   vpc_id = aws_vpc.this.id
+
+  tags = merge(
+    var.common_tags,
+    {
+      "component" = "wordpress"
+    }
+  )
 }
 
 resource "aws_security_group_rule" "wordpress_ingress_tcp" {

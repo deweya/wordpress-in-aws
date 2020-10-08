@@ -63,3 +63,8 @@ variable "key_pair" {
   description = "The key pair to use for SSH into bastion and wordpress instances"
   default     = ""
 }
+
+variable "common_tags" {
+  type        = map(string)
+  description = "A set of common tags"
+}
