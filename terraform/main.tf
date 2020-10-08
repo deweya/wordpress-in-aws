@@ -16,6 +16,7 @@ module "rds" {
   db_name = var.db_name
   db_username = var.db_username
   db_password = var.db_password
+  availability_zones = var.availability_zones
 }
 
 module "ec2" {
@@ -33,4 +34,5 @@ module "ec2" {
   db_name = var.db_name
   db_username = var.db_username
   db_password = var.db_password
+  key_pair = var.key_pair
 }

@@ -10,7 +10,7 @@ resource "aws_instance" "wordpress" {
 
     ami = var.wordpress_ami
     instance_type = "t2.micro"
-    key_name = "wordpress"
+    key_name = var.key_pair != "" ? var.key_pair : null
 
     user_data = <<EOF
 #!/bin/bash
@@ -28,7 +28,7 @@ EOF
 }
 
 resource "aws_instance" "bastion" {
-    count = length(var.availability_zones)
+    count = var.key_pair != "" ? length(var.availability_zones) : 0
 
     ami = "ami-000e7ce4dd68e7a11"
     instance_type = "t2.micro"

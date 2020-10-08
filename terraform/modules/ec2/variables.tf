@@ -57,3 +57,9 @@ variable "db_host" {
     type = string
     description = "The db host"
 }
+
+variable "key_pair" {
+    type = string
+    description = "The key pair to use for SSH into bastion and wordpress instances"
+    default = ""
+}

@@ -22,3 +22,8 @@ variable "db_password" {
     type = string
     description = "The db password"
 }
+
+variable "availability_zones" {
+    type = list(string)
+    description = "A list of AZs to provision subnets to"
+}
