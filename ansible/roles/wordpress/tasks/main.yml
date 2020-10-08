@@ -8,6 +8,10 @@
     src: /tmp/wordpress-5.5.1.tar.gz
     dest: /var/www/html/
 
+- name: Get Salts
+  shell: "curl https://api.wordpress.org/secret-key/1.1/salt/"
+  register: salts
+
 - name: Configure wp-config.php file
   template:
     src: wp-config.php.j2
