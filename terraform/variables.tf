@@ -23,13 +23,18 @@ variable "db_password" {
   description = "The db password"
 }
 
-variable "key_pair" {
-  type        = string
-  description = "The key pair to use for SSH into bastion and wordpress instances"
-  default     = ""
+variable "deploy_bastion" {
+  type = bool
+  description = "Determines if bastion(s) should be deployed"
 }
 
 variable "deploy_wp_to_private_subnet" {
   type = bool
   description = "Determines if WordPress should be deployed to a private subnet behind a NAT gateway"
+}
+
+variable "key_pair" {
+  type        = string
+  description = "The key pair to use for SSH into bastion and wordpress instances"
+  default     = ""
 }

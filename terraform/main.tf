@@ -12,6 +12,7 @@ module "vpc" {
   availability_zones = var.availability_zones
   common_tags        = local.common_tags
   deploy_wp_to_private_subnet = var.deploy_wp_to_private_subnet
+  deploy_bastion = var.deploy_bastion
 }
 
 module "rds" {
@@ -44,4 +45,5 @@ module "ec2" {
   key_pair           = var.key_pair
   common_tags        = local.common_tags
   deploy_wp_to_private_subnet = var.deploy_wp_to_private_subnet
+  deploy_bastion = var.deploy_bastion
 }

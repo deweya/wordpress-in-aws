@@ -20,7 +20,7 @@ packer build -var "aws_access_key=${AWS_ACCESS_KEY}" -var "aws_secret_key=${AWS_
 ```
 
 ## Deploying the CentOS WordPress AMI
-I created a [terraform config](./terraform) for deploying this AMI in a highly-available pattern. Below describes the architecture in which WordPress is deployed:
+I created a [terraform config](./terraform) for deploying this AMI in a highly-available pattern. Below describes an example architecture if you choose to deploy WordPress in private subnets:
 
 ![WordPress AWS Architecture](./images/wordpress-aws.png)
 
@@ -34,7 +34,9 @@ The Terraform config takes the following variables:
 | db_name | The name of the database | Yes |
 | db_username | The db username | Yes |
 | db_password | The db password | Yes |
-| key_pair | The (pre-created) ec2 key pair to use for SSH into bastion and wordpress instances. If left blank, bastions will _not_ be created. | No |
+| deploy_bastion | Determines if bastion(s) should be deployed | Yes |
+| deploy_wp_to_private_subnet | Determines if WordPress should be deployed to a private subnet behind a NAT gateway | Yes |
+| key_pair | The (pre-created) ec2 key pair to use for SSH into bastion and wordpress instances. | No |
 
 Defaults for each required variable are provided in [terraform.tfvars.example](./terraform.tfvars.example). I will use this examples vars file for the installation.
 

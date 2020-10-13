@@ -42,13 +42,13 @@ EOF
 }
 
 resource "aws_instance" "bastion" {
-  count = var.key_pair != "" ? length(var.availability_zones) : 0
+  count = var.deploy_bastion ? length(var.availability_zones) : 0
 
   ami                         = "ami-000e7ce4dd68e7a11"
   instance_type               = "t2.micro"
   key_name                    = "wordpress"
   associate_public_ip_address = true
-  vpc_security_group_ids      = [var.bastion_sg_id]
+  vpc_security_group_ids      = var.deploy_bastion ? [var.bastion_sg_id] : null
   subnet_id                   = var.public_subnet_ids[count.index]
 
   tags = merge(

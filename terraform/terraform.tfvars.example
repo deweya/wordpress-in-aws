@@ -4,3 +4,4 @@ db_username = "myuser123"
 db_password = "mypass123"
 db_name = "wordpress"
 deploy_wp_to_private_subnet = false
+deploy_bastion = false

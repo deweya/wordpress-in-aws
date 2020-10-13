@@ -29,6 +29,6 @@ output "lb_sg_id" {
 }
 
 output "bastion_sg_id" {
-  value       = aws_security_group.bastion.id
+  value       = var.deploy_bastion ? aws_security_group.bastion[0].id : null
   description = "The security group that the basion will use"
 }

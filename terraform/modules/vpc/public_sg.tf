@@ -28,6 +28,8 @@ resource "aws_security_group_rule" "lb_egress" {
 }
 
 resource "aws_security_group" "bastion" {
+  count = var.deploy_bastion ? 1 : 0
+
   vpc_id = aws_vpc.this.id
 
   tags = merge(
@@ -39,8 +41,10 @@ resource "aws_security_group" "bastion" {
 }
 
 resource "aws_security_group_rule" "bastion_ingress" {
+  count = var.deploy_bastion ? 1 : 0
+
   type              = "ingress"
-  security_group_id = aws_security_group.bastion.id
+  security_group_id = aws_security_group.bastion[count.index].id
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 22
@@ -48,8 +52,10 @@ resource "aws_security_group_rule" "bastion_ingress" {
 }
 
 resource "aws_security_group_rule" "bastion_egress" {
+  count = var.deploy_bastion ? 1 : 0
+
   type              = "egress"
-  security_group_id = aws_security_group.bastion.id
+  security_group_id = aws_security_group.bastion[count.index].id
   protocol          = "tcp"
   cidr_blocks       = [aws_vpc.this.cidr_block]
   from_port         = 22
