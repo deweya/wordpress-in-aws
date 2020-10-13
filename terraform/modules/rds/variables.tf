@@ -32,3 +32,8 @@ variable "common_tags" {
   type        = map(string)
   description = "A set of common tags"
 }
+
+variable "rds_multi_az" {
+  type = bool
+  description = "Determines if the RDS database should be deployed across AZs"
+}

@@ -15,7 +15,7 @@ resource "aws_db_instance" "this" {
   db_subnet_group_name    = aws_db_subnet_group.this.name
   vpc_security_group_ids  = [var.db_security_group_id]
   skip_final_snapshot     = true
-  multi_az                = true
+  multi_az                = var.rds_multi_az
   apply_immediately       = true
   backup_window           = "05:00-05:30"
   backup_retention_period = 7

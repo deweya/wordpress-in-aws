@@ -36,6 +36,7 @@ The Terraform config takes the following variables:
 | db_password | The db password | Yes |
 | deploy_bastion | Determines if bastion(s) should be deployed | Yes |
 | deploy_wp_to_private_subnet | Determines if WordPress should be deployed to a private subnet behind a NAT gateway | Yes |
+| rds_multi_az | Determines if the RDS database should be deployed across AZs | Yes |
 | key_pair | The (pre-created) ec2 key pair to use for SSH into bastion and wordpress instances. | No |
 
 Defaults for each required variable are provided in [terraform.tfvars.example](./terraform.tfvars.example). I will use this examples vars file for the installation.

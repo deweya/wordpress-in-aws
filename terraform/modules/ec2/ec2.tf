@@ -1,5 +1,5 @@
 resource "aws_network_interface" "wordpress" {
-  count = length(var.availability_zones)
+  count = var.deploy_wp_to_private_subnet ? length(var.availability_zones): 0
 
   subnet_id       = var.deploy_wp_to_private_subnet ? var.private_subnet_ids[count.index] : var.public_subnet_ids[count.index]
   security_groups = [var.wordpress_sg]
@@ -12,12 +12,21 @@ resource "aws_network_interface" "wordpress" {
   )
 }
 
+resource "aws_network_interface_attachment" "wordpress" {
+  count = var.deploy_wp_to_private_subnet ? length(var.availability_zones): 0
+
+  instance_id = aws_instance.wordpress[count.index].id
+  network_interface_id = aws_network_interface.wordpress[count.index].id
+  device_index = 0
+}
+
 resource "aws_instance" "wordpress" {
   count = length(var.availability_zones)
 
   ami           = var.wordpress_ami
   instance_type = "t2.micro"
   key_name      = var.key_pair != "" ? var.key_pair : null
+  associate_public_ip_address = var.deploy_wp_to_private_subnet ? false : true
 
   user_data = <<EOF
 #!/bin/bash
@@ -27,11 +36,6 @@ echo "SetEnv DB_USER ${var.db_username}" >> /var/www/html/.htaccess
 echo "SetEnv DB_PASSWORD ${var.db_password}" >> /var/www/html/.htaccess
 echo "SetEnv DB_HOST ${var.db_host}" >> /var/www/html/.htaccess
 EOF
-
-  network_interface {
-    network_interface_id = aws_network_interface.wordpress[count.index].id
-    device_index         = 0
-  }
 
   tags = merge(
     var.common_tags,

@@ -33,6 +33,11 @@ variable "deploy_wp_to_private_subnet" {
   description = "Determines if WordPress should be deployed to a private subnet behind a NAT gateway"
 }
 
+variable "rds_multi_az" {
+  type = bool
+  description = "Determines if the RDS database should be deployed across AZs"
+}
+
 variable "key_pair" {
   type        = string
   description = "The key pair to use for SSH into bastion and wordpress instances"

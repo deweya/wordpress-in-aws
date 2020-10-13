@@ -25,6 +25,7 @@ module "rds" {
   db_password          = var.db_password
   availability_zones   = var.availability_zones
   common_tags          = local.common_tags
+  rds_multi_az = var.rds_multi_az
 }
 
 module "ec2" {
