@@ -3,3 +3,4 @@ wordpress_ami = "ami-0f812b388b19d2a4a"
 db_username = "myuser123"
 db_password = "mypass123"
 db_name = "wordpress"
+deploy_wp_to_private_subnet = false

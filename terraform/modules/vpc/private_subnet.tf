@@ -14,7 +14,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_route_table" "private" {
-  count = length(var.availability_zones)
+  count = var.deploy_wp_to_private_subnet ? length(var.availability_zones) : 0
 
   vpc_id = aws_vpc.this.id
 
@@ -32,7 +32,7 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = length(var.availability_zones)
+  count = var.deploy_wp_to_private_subnet ? length(var.availability_zones) : 0
 
   route_table_id = aws_route_table.private[count.index].id
   subnet_id      = aws_subnet.private[count.index].id

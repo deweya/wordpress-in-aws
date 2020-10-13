@@ -33,7 +33,7 @@ resource "aws_security_group_rule" "wordpress_ingress_tcp" {
   type              = "ingress"
   security_group_id = aws_security_group.wordpress.id
   protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.this.cidr_block]
+  cidr_blocks       = var.deploy_wp_to_private_subnet ? [aws_vpc.this.cidr_block] : ["0.0.0.0/0"]
   from_port         = 80
   to_port           = 80
 }
@@ -42,7 +42,7 @@ resource "aws_security_group_rule" "wordpress_ingress_ssh" {
   type              = "ingress"
   security_group_id = aws_security_group.wordpress.id
   protocol          = "tcp"
-  cidr_blocks       = [aws_vpc.this.cidr_block]
+  cidr_blocks       = var.deploy_wp_to_private_subnet ? [aws_vpc.this.cidr_block] : ["0.0.0.0/0"]
   from_port         = 22
   to_port           = 22
 }

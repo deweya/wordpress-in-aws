@@ -28,3 +28,8 @@ variable "key_pair" {
   description = "The key pair to use for SSH into bastion and wordpress instances"
   default     = ""
 }
+
+variable "deploy_wp_to_private_subnet" {
+  type = bool
+  description = "Determines if WordPress should be deployed to a private subnet behind a NAT gateway"
+}

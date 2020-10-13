@@ -1,7 +1,7 @@
 resource "aws_network_interface" "wordpress" {
   count = length(var.availability_zones)
 
-  subnet_id       = var.private_subnet_ids[count.index]
+  subnet_id       = var.deploy_wp_to_private_subnet ? var.private_subnet_ids[count.index] : var.public_subnet_ids[count.index]
   security_groups = [var.wordpress_sg]
 
   tags = merge(
