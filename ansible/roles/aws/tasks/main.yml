@@ -1,0 +1,25 @@
+- name: Install unzip
+  dnf:
+    name: unzip
+    state: latest
+
+- name: Download AWS zip file
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.56.zip
+    dest: /tmp/awscli.zip
+
+- name: Unzip the AWS zip file
+  unarchive:
+    src: /tmp/awscli.zip
+    dest: /tmp
+
+- name: Run the AWS CLI installer
+  shell: "/tmp/aws/install"
+
+- name: Remove the AWS files
+  shell: "rm -rf /tmp/awscli.zip /tmp/aws"
+
+- name: Install jq
+  dnf:
+    name: jq
+    state: latest

@@ -1,8 +1,9 @@
 availability_zones = ["us-east-2a", "us-east-2b"]
-wordpress_ami = "ami-0f812b388b19d2a4a"
+wordpress_ami = "ami-008f8fa3beadf3283"
 db_username = "myuser123"
 db_password = "mypass123"
 db_name = "wordpress"
 deploy_wp_to_private_subnet = false
 deploy_bastion = false
 rds_multi_az = false
+key_pair = "wordpress"

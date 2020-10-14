@@ -15,6 +15,22 @@ module "vpc" {
   deploy_bastion = var.deploy_bastion
 }
 
+module "ssm" {
+  source = "./modules/ssm"
+
+  db_name = var.db_name
+  db_username          = var.db_username
+  db_password          = var.db_password
+}
+
+module "iam" {
+  source = "./modules/iam"
+
+  db_name_arn = module.ssm.db_name_arn
+  db_username_arn = module.ssm.db_username_arn
+  db_password_arn = module.ssm.db_password_arn
+}
+
 module "rds" {
   source = "./modules/rds"
 
@@ -47,4 +63,5 @@ module "ec2" {
   common_tags        = local.common_tags
   deploy_wp_to_private_subnet = var.deploy_wp_to_private_subnet
   deploy_bastion = var.deploy_bastion
+  instance_profile_name = module.iam.instance_profile_name
 }

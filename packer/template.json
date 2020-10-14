@@ -8,8 +8,9 @@
             "source_ami": "ami-000e7ce4dd68e7a11",
             "instance_type": "t2.micro",
             "ssh_username": "centos",
-            "ami_name": "wordpress-centos8"
-
+            "ami_name": "wordpress-centos8",
+            "force_deregister": "true",
+            "force_delete_snapshot": "true"
         }
     ],
     "provisioners": [
@@ -22,6 +23,7 @@
             "playbook_file": "../ansible/main.yml",
             "role_paths": [
                 "../ansible/roles/apache",
+                "../ansible/roles/aws",
                 "../ansible/roles/wordpress"
             ]
         }

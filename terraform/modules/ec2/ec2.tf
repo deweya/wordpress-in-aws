@@ -27,13 +27,16 @@ resource "aws_instance" "wordpress" {
   instance_type = "t2.micro"
   key_name      = var.key_pair != "" ? var.key_pair : null
   associate_public_ip_address = var.deploy_wp_to_private_subnet ? false : true
+  subnet_id = var.deploy_wp_to_private_subnet ? null : var.public_subnet_ids[count.index]
+  security_groups = var.deploy_wp_to_private_subnet ? null : [var.wordpress_sg]
+  iam_instance_profile = var.instance_profile_name
 
   user_data = <<EOF
 #!/bin/bash
 rm -f /var/www/html/.htaccess
-echo "SetEnv DB_NAME ${var.db_name}" >> /var/www/html/.htaccess
-echo "SetEnv DB_USER ${var.db_username}" >> /var/www/html/.htaccess
-echo "SetEnv DB_PASSWORD ${var.db_password}" >> /var/www/html/.htaccess
+echo "SetEnv DB_NAME $(aws ssm get-parameters --names db_name | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
+echo "SetEnv DB_USER $(aws ssm get-parameters --names db_username | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
+echo "SetEnv DB_PASSWORD $(aws ssm get-parameters --names db_password | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
 echo "SetEnv DB_HOST ${var.db_host}" >> /var/www/html/.htaccess
 EOF
 

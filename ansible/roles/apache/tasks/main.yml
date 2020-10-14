@@ -10,7 +10,7 @@
       - php-mysqli
       - php-json
 
-- name: Allow htttpd to make network connections
+- name: Allow httpd to make network connections
   seboolean:
     name: httpd_can_network_connect
     state: yes

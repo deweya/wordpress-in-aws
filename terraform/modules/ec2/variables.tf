@@ -78,3 +78,8 @@ variable "deploy_bastion" {
   type = bool
   description = "Determines if bastion(s) should be deployed to the public subnet(s)"
 }
+
+variable "instance_profile_name" {
+  type = string
+  description = "The name of the instance profile to use for getting database credentials"
+}
