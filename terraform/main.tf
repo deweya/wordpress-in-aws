@@ -29,6 +29,7 @@ module "iam" {
   db_name_arn = module.ssm.db_name_arn
   db_username_arn = module.ssm.db_username_arn
   db_password_arn = module.ssm.db_password_arn
+  parameters_key_arn = module.ssm.parameters_key_arn
 }
 
 module "rds" {

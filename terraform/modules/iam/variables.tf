@@ -12,3 +12,8 @@ variable "db_password_arn" {
   type        = string
   description = "The arn of the db password parameter"
 }
+
+variable "parameters_key_arn" {
+  type = string
+  description = "The arn of the parameters key for encrypting/decrypting parameters"
+}

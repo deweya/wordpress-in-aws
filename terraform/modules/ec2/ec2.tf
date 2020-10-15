@@ -35,8 +35,8 @@ resource "aws_instance" "wordpress" {
 #!/bin/bash
 rm -f /var/www/html/.htaccess
 echo "SetEnv DB_NAME $(aws ssm get-parameters --names db_name | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
-echo "SetEnv DB_USER $(aws ssm get-parameters --names db_username | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
-echo "SetEnv DB_PASSWORD $(aws ssm get-parameters --names db_password | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
+echo "SetEnv DB_USER $(aws ssm get-parameters --names db_username --with-decryption | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
+echo "SetEnv DB_PASSWORD $(aws ssm get-parameters --names db_password --with-decryption | jq -r '.Parameters[0].Value')" >> /var/www/html/.htaccess
 echo "SetEnv DB_HOST ${var.db_host}" >> /var/www/html/.htaccess
 EOF
 

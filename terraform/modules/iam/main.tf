@@ -36,6 +36,15 @@ resource "aws_iam_role_policy" "get_parameters" {
                 "${var.db_username_arn}",
                 "${var.db_password_arn}"
             ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "${var.parameters_key_arn}"
+            ]
         }
     ]
 }
